@@ -11,11 +11,11 @@ namespace GS_Shop.Model.Model
         public int ID { set; get; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(256)]
         public string Name { set; get; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(256)]
         [Column(TypeName = "varchar")]
         public string Alias { set; get; }
 

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 
 namespace GS_Shop.Data.Infrastructure
-{
-    public abstract class RepositoryBase<T> where T : class // lớp này làm nhiệm vụ thực thi các class mà chúng ta định nghĩa trong IRepository
+{   //class này chứa các phương thức thêm sửa xóa lấy dữ liệu cơ bản
+    public abstract class RepositoryBase<T> : IRepository<T> where T : class // lớp này làm nhiệm vụ thực thi các class mà chúng ta định nghĩa trong IRepository
     {
         #region Properties
 

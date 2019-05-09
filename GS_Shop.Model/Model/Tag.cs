@@ -8,6 +8,7 @@ namespace GS_Shop.Model.Model
     {
         [Key]
         [MaxLength(100)]
+        [Column(TypeName = "varchar")]
         public string ID { set; get; }
 
         [Required]

@@ -7,10 +7,21 @@ namespace GS_Shop.Model.Model
     [Table("PostCategorys")]
     public class PostCategory
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { set; get; }
+
         [Required]
-        [MaxLength(100)]
+        [MaxLength(256)]
+        public string Name { set; get; }
+
+        [Required]
+        [MaxLength(256)]
         [Column(TypeName = "varchar")]
         public string Alias { set; get; }
+
+        [MaxLength(256)]
+        public string Image { set; get; }
 
         [MaxLength(500)]
         public string Description { set; get; }
@@ -19,18 +30,8 @@ namespace GS_Shop.Model.Model
 
         public bool? HomeFlag { set; get; }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int? ParentID { set; get; }
 
-        [MaxLength(200)]
-        public string Image { set; get; }
-
-        [Required]
-        [MaxLength(100)]
-        public string Name { set; get; }
-
-        public int? Parent { set; get; }
         public virtual IEnumerable<Post> Posts { set; get; }
     }
 }
