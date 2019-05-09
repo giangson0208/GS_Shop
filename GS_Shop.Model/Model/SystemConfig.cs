@@ -7,7 +7,7 @@ namespace GS_Shop.Model.Model
     public class SystemConfig
     {
         [Key]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(100)]

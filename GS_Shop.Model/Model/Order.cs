@@ -13,26 +13,26 @@ namespace GS_Shop.Model.Model
         public int ID { set; get; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(256)]
         public string CustomerName { set; get; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(256)]
         public string CustomerAddress { set; get; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(256)]
         public string CustomerEmail { set; get; }
 
         [Required]
-        [MaxLength(15)]
+        [MaxLength(20)]
         public string CustomerMobile { set; get; }
 
         [Required]
-        [MaxLength(200)]
+        [MaxLength(256)]
         public string CustomerMessage { set; get; }
 
-        [MaxLength(100)]
+        [MaxLength(256)]
         public string PaymentMethod { set; get; }
 
         public DateTime? CreatedDate { set; get; }

@@ -15,7 +15,7 @@ namespace GS_Shop.Model.Model
         public string Name { set; get; }
 
         [Required]
-        [MaxLength(200)]
+        [MaxLength(256)]
         public string URL { set; get; }
 
         public int? DisplayOrder { set; get; }
@@ -25,9 +25,9 @@ namespace GS_Shop.Model.Model
         [ForeignKey("GroupID")]
         public virtual MenuGroup MenuGroup { set; get; }
 
+        [MaxLength(10)]
         public string Target { set; get; }
 
-        [Required]
         public bool Status { set; get; }
     }
 }
