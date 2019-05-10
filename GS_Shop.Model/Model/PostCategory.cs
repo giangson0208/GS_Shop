@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using GS_Shop.Model.Abstract;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GS_Shop.Model.Model
 {
     [Table("PostCategorys")]
-    public class PostCategory
+    public class PostCategory : AudiTable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

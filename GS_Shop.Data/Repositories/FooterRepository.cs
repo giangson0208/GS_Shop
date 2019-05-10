@@ -3,7 +3,7 @@ using GS_Shop.Model.Model;
 
 namespace GS_Shop.Data.Repositories
 {
-    public interface IFooterRepository //interface này dùng để định nghĩa các phương thức cần phải thêm k nằm trong RepositoryBase
+    public interface IFooterRepository : IRepository<Footer> //interface này dùng để định nghĩa các phương thức cần phải thêm k nằm trong RepositoryBase
     {
     }
 

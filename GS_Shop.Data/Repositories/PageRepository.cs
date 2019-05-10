@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GS_Shop.Data.Repositories
 {
-    public interface IPageRepository 
+    public interface IPageRepository : IRepository<Page>
     {
     }
 

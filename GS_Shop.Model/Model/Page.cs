@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GS_Shop.Model.Abstract;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GS_Shop.Model.Model
 {
     [Table("Pages")]
-    public class Page
+    public class Page : AudiTable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

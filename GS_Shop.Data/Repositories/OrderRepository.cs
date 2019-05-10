@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GS_Shop.Data.Repositories
 {
-    public interface IOrderRepository //interface này dùng để định nghĩa các phương thức cần phải thêm k nằm trong RepositoryBase
+    public interface IOrderRepository : IRepository<Order> //interface này dùng để định nghĩa các phương thức cần phải thêm k nằm trong RepositoryBase
     {
     }
 

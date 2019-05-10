@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace GS_Shop.Data.Repositories
 {
-    public interface IProductCategoryRepository //interface này dùng để định nghĩa các phương thức cần phải thêm k nằm trong RepositoryBase
+    public interface IProductCategoryRepository : IRepository<ProductCategory>  //interface này dùng để định nghĩa các phương thức cần phải thêm k nằm trong RepositoryBase
     {
         IEnumerable<ProductCategory> GetByAlias(string alias);  //trả ra 1 list ProductCategory
     }
