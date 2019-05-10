@@ -19,6 +19,8 @@ namespace GS_Shop.Service
 
         IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalRow); //lấy bản ghi đã phân trang
 
+        IEnumerable<Post> GetAllByCategoryPaging(int categoryId, int page, int pageSize, out int totalRow); //lấy bản ghi đã phân trang
+
         IEnumerable<Post> GetByTagPaging(string tag, int page, int pageSize, out int totalRow); //lấy bản ghi theo tag đã phân trang
 
         void SaveChanges();
@@ -26,8 +28,8 @@ namespace GS_Shop.Service
 
     public class PostService : IPostService
     {
-        private IPostRepository _postRepository;
-        private IUnitOfWork _unitOfWork;
+         IPostRepository _postRepository;
+         IUnitOfWork _unitOfWork;
 
         public PostService(IPostRepository postRepository, IUnitOfWork unitOfWork) //Mối lần khởi tạo class Service thì phải truyền 2 cái đối tượng của IPostRepository và IUnitOfWork
         {
@@ -51,6 +53,11 @@ namespace GS_Shop.Service
             //VD : select bài viết và select đc cả cái category của nó để sau này show ra chi tiết tin tức có thể show ra tên danh mục
         }
 
+        public IEnumerable<Post> GetAllByCategoryPaging(int categoryId, int page, int pageSize, out int totalRow)
+        {
+            return _postRepository.GetMultiPaging(x => x.Status && x.CategoryID == categoryId, out totalRow, page, pageSize, new string[] { "PostCategory" });
+        }
+
         public IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalRow)
         {
             return _postRepository.GetMultiPaging(x => x.Status, out totalRow, page, pageSize);
@@ -63,7 +70,7 @@ namespace GS_Shop.Service
 
         public IEnumerable<Post> GetByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
-            return _postRepository.GetMultiPaging(x => x.Status, out totalRow, page, pageSize);
+            return _postRepository.GetAllByTag(tag,page,pageSize,out totalRow);
         }
 
         public void SaveChanges()
