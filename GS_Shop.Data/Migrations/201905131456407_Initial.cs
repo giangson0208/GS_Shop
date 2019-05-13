@@ -3,7 +3,7 @@ namespace GS_Shop.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialDB : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -133,6 +133,13 @@ namespace GS_Shop.Data.Migrations
                         Name = c.String(nullable: false, maxLength: 256),
                         Alias = c.String(nullable: false, maxLength: 256, unicode: false),
                         Content = c.String(),
+                        CreatedDate = c.DateTime(),
+                        CreatedBy = c.String(maxLength: 256),
+                        UpdateDate = c.DateTime(),
+                        UpdateBy = c.String(maxLength: 256),
+                        MetaKeyword = c.String(maxLength: 256),
+                        MetaDescription = c.String(maxLength: 256),
+                        Status = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -148,6 +155,13 @@ namespace GS_Shop.Data.Migrations
                         DisplayOrder = c.Int(),
                         HomeFlag = c.Boolean(),
                         ParentID = c.Int(),
+                        CreatedDate = c.DateTime(),
+                        CreatedBy = c.String(maxLength: 256),
+                        UpdateDate = c.DateTime(),
+                        UpdateBy = c.String(maxLength: 256),
+                        MetaKeyword = c.String(maxLength: 256),
+                        MetaDescription = c.String(maxLength: 256),
+                        Status = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -165,6 +179,13 @@ namespace GS_Shop.Data.Migrations
                         HomeFlag = c.Boolean(),
                         HotFlag = c.Boolean(),
                         ViewCout = c.Int(),
+                        CreatedDate = c.DateTime(),
+                        CreatedBy = c.String(maxLength: 256),
+                        UpdateDate = c.DateTime(),
+                        UpdateBy = c.String(maxLength: 256),
+                        MetaKeyword = c.String(maxLength: 256),
+                        MetaDescription = c.String(maxLength: 256),
+                        Status = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.PostCategorys", t => t.CategoryID, cascadeDelete: true)

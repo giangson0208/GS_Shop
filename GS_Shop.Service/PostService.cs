@@ -8,21 +8,13 @@ namespace GS_Shop.Service
     public interface IPostService
     {
         void Add(Post post);    //thêm bản ghi
-
         void Update(Post post); //sửa
-
         void Delete(int id);    //xóa
-
         IEnumerable<Post> GetAll(); //lấy tất cả bản ghi
-
         Post GetById(int id);   //lấy bản ghi theo ID
-
         IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalRow); //lấy bản ghi đã phân trang
-
         IEnumerable<Post> GetAllByCategoryPaging(int categoryId, int page, int pageSize, out int totalRow); //lấy bản ghi đã phân trang
-
         IEnumerable<Post> GetByTagPaging(string tag, int page, int pageSize, out int totalRow); //lấy bản ghi theo tag đã phân trang
-
         void SaveChanges();
     }
 

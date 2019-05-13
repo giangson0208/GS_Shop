@@ -6,13 +6,13 @@ namespace GS_Shop.Data.Infrastructure
 {
     public interface IRepository<T> where T : class   //định nghĩa các phương thức có sẵn
     {   //sử dụng cho tất cả các class trong project
-        void Add(T entity);
+        T Add(T entity);
 
         void Update(T entity);
 
-        void Delete(T entity);
+        T Delete(T entity);
 
-        void Delete(int id);
+        T Delete(int id);
 
         void DeleteMulti(Expression<Func<T, bool>> where);
 

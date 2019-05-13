@@ -1,11 +1,7 @@
 ﻿using GS_Shop.Data.Infrastructure;
 using GS_Shop.Data.Repositories;
 using GS_Shop.Model.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GS_Shop.Service
 {
@@ -17,17 +13,19 @@ namespace GS_Shop.Service
         IEnumerable<PostCategory> GetAll();
         IEnumerable<PostCategory> GetAllParenId(int parentId);
         PostCategory GetById(int id);
-
     }
+
     public class PostCategoryService : IPostCategoryService
     {
-        IPostCategoryRepository _postCategoryRepository;
-        IUnitOfWork _unitOfWork;
+        private IPostCategoryRepository _postCategoryRepository;
+        private IUnitOfWork _unitOfWork;
+
         public PostCategoryService(IPostCategoryRepository postCategoryRepository, IUnitOfWork unitOfWork)
         {
             this._postCategoryRepository = postCategoryRepository; //gán vào biến nội tại và thao tác trong các phương thức
             this._unitOfWork = unitOfWork;
         }
+
         public void Add(PostCategory postCategory)
         {
             _postCategoryRepository.Add(postCategory);
@@ -45,7 +43,7 @@ namespace GS_Shop.Service
 
         public IEnumerable<PostCategory> GetAllParenId(int parentId)
         {
-            return _postCategoryRepository.GetMulti(x=>x.Status && x.ParentID == parentId);
+            return _postCategoryRepository.GetMulti(x => x.Status && x.ParentID == parentId);
         }
 
         public PostCategory GetById(int id)
