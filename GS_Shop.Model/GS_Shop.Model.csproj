@@ -58,6 +58,7 @@
     <Compile Include="Abstract\AudiTable.cs" />
     <Compile Include="Abstract\IAudiTable.cs" />
     <Compile Include="Model\ApplicationUser.cs" />
+    <Compile Include="Model\Error.cs" />
     <Compile Include="Model\Footer.cs" />
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\MenuGroup.cs" />
