@@ -1,5 +1,4 @@
-﻿using GS_Shop.Service;
-using GS_Shop.Web.Infrastructure.Core;
+﻿using GS_Shop.Web.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +10,6 @@ namespace GS_Shop.Web.Api
 {
     public class PostCategoryController : ApiControllerBase //bất cứ 1 api nào cũng phải kế thừa từ ApiControllerBase
     {
-        private IPostCategoryService _postCategoryService;
-
-        public PostCategoryController(IErrorService errorService, IPostCategoryService postCategoryService) :
-            base(errorService)
-        {
-            this._postCategoryService = postCategoryService;
-        }
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
