@@ -13,6 +13,7 @@ namespace GS_Shop.Service
         IEnumerable<PostCategory> GetAll();
         IEnumerable<PostCategory> GetAllParenId(int parentId);
         PostCategory GetById(int id);
+        void SaveChange();
     }
 
     public class PostCategoryService : IPostCategoryService
@@ -54,6 +55,10 @@ namespace GS_Shop.Service
         public void Update(PostCategory postCategory)
         {
             _postCategoryRepository.Update(postCategory);
+        }
+        public void SaveChange()
+        {
+            _unitOfWork.Commit();
         }
     }
 }
