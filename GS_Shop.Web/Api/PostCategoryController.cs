@@ -1,4 +1,5 @@
-﻿using GS_Shop.Service;
+﻿using GS_Shop.Model.Model;
+using GS_Shop.Service;
 using GS_Shop.Web.Infrastructure.Core;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Http;
 
 namespace GS_Shop.Web.Api
 {
+    [RoutePrefix("api/postcategory")]
     public class PostCategoryController : ApiControllerBase //bất cứ 1 api nào cũng phải kế thừa từ ApiControllerBase
     {
         private IPostCategoryService _postCategoryService;
@@ -16,33 +18,80 @@ namespace GS_Shop.Web.Api
         public PostCategoryController(IErrorService errorService, IPostCategoryService postCategoryService) :
             base(errorService)
         {
-            this._postCategoryService = postCategoryService;
+            this._postCategoryService = postCategoryService; 
         }
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        [Route("getall")]
+        public HttpResponseMessage Get(HttpRequestMessage request, PostCategory postCategory)
         {
-            return new string[] { "value1", "value2" };
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid) //kiểm tra xem form ở dưới đã valid chưa
+                {
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var listCategory = _postCategoryService.GetAll();
+                    response = request.CreateResponse(HttpStatusCode.Created, listCategory);
+                }
+                return response;
+            });
+        }
+        public HttpResponseMessage Post(HttpRequestMessage request,PostCategory postCategory)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if(ModelState.IsValid) //kiểm tra xem form ở dưới đã valid chưa
+                {
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest,ModelState);
+                }
+                else
+                {
+                    var category = _postCategoryService.Add(postCategory);
+                    _postCategoryService.SaveChange();
+                    response = request.CreateResponse(HttpStatusCode.Created, category);
+                }
+                    return response;
+            });
+        }
+        public HttpResponseMessage Put(HttpRequestMessage request, PostCategory postCategory)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid) //kiểm tra xem form ở dưới đã valid chưa
+                {
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    _postCategoryService.Update(postCategory);
+                    _postCategoryService.SaveChange();
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
+                return response;
+            });
+        }
+        public HttpResponseMessage Put(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid) //kiểm tra xem form ở dưới đã valid chưa
+                {
+                    request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    _postCategoryService.Delete(id);
+                    _postCategoryService.SaveChange();
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
+                return response;
+            });
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
     }
 }
