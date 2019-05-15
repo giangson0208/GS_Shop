@@ -9,7 +9,7 @@ namespace GS_Shop.Data.Repositories
 
     public class FooterRepository : RepositoryBase<Footer>, IFooterRepository //RepositoryBase cần truyền vào 1 kiểu theo tác
     {
-        public FooterRepository(DbFactory dbFactory) : base(dbFactory) //nhận đối tượng truyền vào là 1 đối tượng DbFactory
+        public FooterRepository(IDbFactory dbFactory) : base(dbFactory) //nhận đối tượng truyền vào là 1 đối tượng DbFactory
         {
             //nếu không có phương thức đặc thù mà chỉ dùng chung các pt trong RepositoryBase thì chỉ cần Contructor này thôi
         }

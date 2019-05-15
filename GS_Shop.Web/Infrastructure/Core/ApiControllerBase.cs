@@ -15,15 +15,18 @@ namespace GS_Shop.Web.Infrastructure.Core
     public class ApiControllerBase : ApiController
     {
         private IErrorService _errorService;
+
         public ApiControllerBase(IErrorService errorService)
         {
             this._errorService = errorService;
         }
-        protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage,Func<HttpResponseMessage> func)
+
+        protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)
         {
-            HttpResponseMessage response= null;
-            try { 
-            response = func.Invoke();
+            HttpResponseMessage response = null;
+            try
+            {
+                response = function.Invoke();
             }
             catch (DbEntityValidationException ex)
             {
@@ -41,18 +44,20 @@ namespace GS_Shop.Web.Infrastructure.Core
             catch (DbUpdateException dbEx)
             {
                 LogError(dbEx);
-                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, dbEx.InnerException);
+                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, dbEx.InnerException.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 LogError(ex);
                 response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
-            return response; 
+            return response;
         }
+
         private void LogError(Exception ex)
         {
-            try {
+            try
+            {
                 Error error = new Error();
                 error.CreateDate = DateTime.Now;
                 error.Message = ex.Message;
@@ -60,7 +65,9 @@ namespace GS_Shop.Web.Infrastructure.Core
                 _errorService.Add(error);
                 _errorService.SaveChanges();
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 }
