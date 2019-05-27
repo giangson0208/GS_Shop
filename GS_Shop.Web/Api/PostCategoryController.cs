@@ -1,10 +1,13 @@
-﻿using GS_Shop.Model.Model;
+﻿using AutoMapper;
+using GS_Shop.Model.Model;
 using GS_Shop.Service;
 using GS_Shop.Web.Infrastructure.Core;
+using GS_Shop.Web.Models;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using GS_Shop.Web.Infrastructure.Extentions;
 namespace GS_Shop.Web.Api
 {
     [RoutePrefix("api/postcategory")]
@@ -24,15 +27,15 @@ namespace GS_Shop.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 var listCategory = _postCategoryService.GetAll();
+                var listPostCategoryVM = Mapper.Map<List<PostCategoryViewModel>>(listCategory);
 
                 HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listCategory);
 
-
                 return response;
             });
         }
-
-        public HttpResponseMessage Post(HttpRequestMessage request, PostCategory postCategory)
+        [Route("add")]
+        public HttpResponseMessage Post(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -43,17 +46,19 @@ namespace GS_Shop.Web.Api
                 }
                 else
                 {
-                    var category = _postCategoryService.Add(postCategory);
+                    PostCategory newPostCategory = new PostCategory();
+                    newPostCategory.UpdatePostCategory(postCategoryVM);
+
+                    var category = _postCategoryService.Add(newPostCategory);
                     _postCategoryService.SaveChange();
 
                     response = request.CreateResponse(HttpStatusCode.Created, category);
-
                 }
                 return response;
             });
         }
-
-        public HttpResponseMessage Put(HttpRequestMessage request, PostCategory postCategory)
+        [Route("update")]
+        public HttpResponseMessage Put(HttpRequestMessage request, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(request, () =>
             {
@@ -64,7 +69,9 @@ namespace GS_Shop.Web.Api
                 }
                 else
                 {
-                    _postCategoryService.Update(postCategory);
+                    var postCategoryDb = _postCategoryService.GetById(postCategoryVM.ID);
+                    postCategoryDb.UpdatePostCategory(postCategoryVM);
+                    _postCategoryService.Update(postCategoryDb);
                     _postCategoryService.SaveChange();
 
                     response = request.CreateResponse(HttpStatusCode.OK);

@@ -12,7 +12,7 @@ namespace GS_Shop.Web
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            AutoMapperConfiguration.Configure();
+            AutoMapperConfiguration.Configure(); //regis từ Auto mapper
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
